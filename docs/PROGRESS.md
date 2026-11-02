@@ -5,7 +5,7 @@
 ---
 
 ## Estado actual
-**Fase:** 0 — Planificación completada
+**Fase:** 1 — MVP en curso (páginas listas, falta deploy)
 **Fecha:** 2026-11-02
 
 ---
@@ -24,27 +24,34 @@
 - [x] Documento maestro PROJECT.md creado
 - [x] Repositorio local inicializado en D:\Aliiatech General\Ministerio-GloriaYFuego
 
+### Fase 1 — MVP Rápido
+- [x] Setup Next.js 15.5 + TypeScript + Tailwind v4 + shadcn/ui (button, input, textarea, label)
+- [x] Design system: paleta en `src/app/globals.css` (`@theme`), Lora + Inter, tokens shadcn
+- [x] Componentes base: Header (menú móvil), Footer, Hero, PageHeader, PendingNote
+- [x] Homepage responsive (`src/app/(public)/page.tsx`)
+- [x] Página /en-vivo (plugin de página de Facebook; aviso si falta el enlace)
+- [x] Página /nosotros (con placeholders)
+- [x] Formulario /peticiones (server action + Zod → Formspree, campo anti-spam)
+- [x] Página /colabora (QR Yape/Plin pendiente)
+- [x] Página /contacto (WhatsApp + mapa de Google sin API key)
+- [x] SEO básico: metadata por página, Open Graph, Twitter, imagen OG, sitemap.xml, robots.txt
+
 ---
 
 ## 🔄 En curso
-- Nada aún — esperando inicio de Fase 1
+- Deploy en Vercel
 
 ---
 
 ## ⏳ Pendiente
 
 ### Fase 1 — MVP Rápido
-- [ ] Setup Next.js + TypeScript + Tailwind + shadcn/ui
-- [ ] Design system: colores, tipografía, componentes base
-- [ ] Homepage completa y responsive
-- [ ] Página /en-vivo (embed Facebook Live)
-- [ ] Página /nosotros (con placeholders)
-- [ ] Formulario /peticiones (Formspree)
-- [ ] Página /colabora (QR Yape/Plin)
-- [ ] Página /contacto (WhatsApp + mapa)
-- [ ] SEO básico (metadata, OG, sitemap)
-- [ ] Deploy en Vercel
+- [ ] Deploy en Vercel (variables: `FORMSPREE_ENDPOINT`, `NEXT_PUBLIC_SITE_URL`)
 - [ ] Dominio propio conectado
+
+### Cómo cargar los datos del ministerio
+Todos los datos pendientes viven en `src/lib/site.ts` (`facebookUrl`, `whatsappNumber`,
+`address`, `schedule`, `donationQrImage`). Al completarlos, los avisos "pendiente" desaparecen solos.
 
 ### Información pendiente del ministerio
 - [ ] Logo oficial (PNG/SVG)
@@ -71,7 +78,6 @@ Ninguno aún.
 ---
 
 ## 🔜 Próxima sesión
-Iniciar Fase 1: setup del proyecto Next.js
-```bash
-npx create-next-app@latest gloria-y-fuego --typescript --tailwind --app --src-dir
-```
+1. Crear el formulario en Formspree y poner su URL en `FORMSPREE_ENDPOINT` (`.env.local` y Vercel)
+2. Importar el repo en Vercel y desplegar
+3. Cargar en `src/lib/site.ts` los datos reales que entregue el ministerio

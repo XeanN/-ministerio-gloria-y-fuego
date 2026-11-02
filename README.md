@@ -13,7 +13,7 @@ Comunidad, transmisiones, enseñanzas, recursos y peticiones de oración.
 - YouTube / Facebook Live (videos)
 
 ## Fase actual
-🟡 Fase 0 — Planificación
+🟡 Fase 1 — MVP (páginas públicas listas, deploy pendiente)
 
 ## Documentación
 - [PROJECT.md](./docs/PROJECT.md) — Documento maestro completo
@@ -21,9 +21,9 @@ Comunidad, transmisiones, enseñanzas, recursos y peticiones de oración.
 
 ## Desarrollo local
 ```bash
-# Próximamente cuando inicie Fase 1
 npm install
-npm run dev
+cp .env.example .env.local   # completar FORMSPREE_ENDPOINT
+npm run dev                  # http://localhost:3000
 ```
 
 ## Propietario
