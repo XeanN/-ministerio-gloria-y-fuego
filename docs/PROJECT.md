@@ -60,19 +60,15 @@ Inspiración combinada de 4 referencias analizadas:
 | Validación | Zod | — |
 | Base de datos | Neon PostgreSQL | 1 GB / 100 CU-h / mes |
 | Autenticación | Better Auth | Gratuito |
-| Hosting | Vercel ⭐ | Free tier (recomendado sobre CF Workers) |
+| Hosting | Cloudflare Workers con OpenNext | URL pública `workers.dev`; revisar variables y módulos dinámicos |
 | Archivos/Imágenes | Cloudflare R2 | 10 GB / 1M ops / mes |
 | CDN | Cloudflare | Free |
 | Videos | YouTube + Facebook Live embeds | Gratuito |
 | Código | GitHub | Gratuito |
 | Email/Newsletter | Mailchimp | 500 contactos / 1K emails gratis |
 
-### Por qué Vercel sobre Cloudflare Workers
-Cloudflare Workers tiene un límite real de **10ms de CPU por request** en el plan gratuito.
-Con Next.js + consultas a Neon (latencia de red incluida) ese límite es problemático.
-Vercel fue creado por el mismo equipo de Next.js — compatibilidad perfecta, sin ese riesgo.
-
-> ⚠️ Si en el futuro se necesita CF Workers, hacer prueba técnica primero con vinext (todavía en beta).
+### Estado del hosting
+Vercel fue la opción inicial del plan. El proyecto ahora está desplegado en Cloudflare Workers mediante OpenNext; la URL pública está anotada en la sección de notas. Falta validar variables de producción y probar los módulos que dependen de Neon, Better Auth y R2.
 
 ### Por qué NO usamos
 - ❌ n8n / Make — costo de servidor
@@ -221,7 +217,7 @@ audit_logs          — Auditoría de cambios importantes
 - [ ] Página Colabora con QR de Yape/Plin (imagen, sin pasarela)
 - [ ] Página Contacto con WhatsApp y mapa
 - [ ] SEO básico (metadata, OG, sitemap)
-- [ ] Deploy en Vercel + dominio propio
+- [ ] Validar el deploy de Cloudflare Workers y conectar dominio propio
 
 ### Fase 2 — Contenido y Videoteca
 - [ ] Neon PostgreSQL configurado
@@ -320,7 +316,7 @@ Los siguientes datos se actualizarán cuando estén disponibles:
 
 | Decisión | Elegido | Alternativa descartada | Razón |
 |---|---|---|---|
-| Hosting | Vercel | Cloudflare Workers | Workers tiene límite de 10ms CPU; Vercel = equipo de Next.js |
+| Hosting | Cloudflare Workers con OpenNext | Vercel | El proyecto ya se configuró y publicó en Workers; verificar variables de producción y los módulos dinámicos |
 | Base de datos | Neon PostgreSQL | Supabase | Más control con Drizzle + Better Auth |
 | Auth | Better Auth | NextAuth / Supabase Auth | Funciona bien con Neon, sin dependencias extras |
 | Framework | Next.js | React + Vite | SEO nativo, SSR/SSG integrado, metadata por página |
@@ -336,7 +332,8 @@ Los siguientes datos se actualizarán cuando estén disponibles:
 - Este proyecto es de **Angel Jean Pierre Ponce Bonifacio** bajo la marca **Aliitech**
 - El ministerio se llama **Gloria y Fuego**
 - Repositorio local: `D:\Aliiatech General\Ministerio-GloriaYFuego`
-- Deploy: Vercel (conectado a GitHub)
+- Deploy actual: Cloudflare Workers — https://ministerio-gloria-y-fuego.angel-xp-pb.workers.dev/
+- Referencia para la próxima revisión del panel: https://impulsoplusiglesias.com/
 - Dominio: pendiente de decisión
 
 ## 14. Estado de implementación del backend

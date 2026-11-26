@@ -78,7 +78,7 @@
 ## ⏳ Pendiente
 
 ### Fase 1 — MVP Rápido
-- [ ] Deploy en Vercel (variables: `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `NEXT_PUBLIC_SITE_URL`; `FORMSPREE_ENDPOINT` solo como alternativa)
+- [ ] Verificar variables de producción y funciones dinámicas en Cloudflare Workers (`DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `NEXT_PUBLIC_SITE_URL`; `FORMSPREE_ENDPOINT` solo como alternativa)
 - [ ] Dominio propio conectado
 
 ### Cómo cargar los datos del ministerio
@@ -118,9 +118,9 @@ Ninguno aún.
 
 ---
 
-## 🔜 Próxima sesión
-1. Agregar credenciales de Neon y Better Auth en `.env.local`
-2. Ejecutar `npm run db:migrate` y crear el primer usuario con `npm run auth:create-admin -- --email ... --name ... --role admin`
-3. Agregar credenciales/CORS de Cloudflare R2 y probar la carga de PDF e imágenes
-4. Ingresar contenido confirmado y cargar datos reales del ministerio
-5. Desplegar en Vercel con las variables correspondientes
+## 🔜 Próximo trabajo
+1. Revisar y mejorar UX/UI del panel administrativo comparándolo con Impulso Plus Iglesias: navegación, dashboard, búsqueda/filtros y gestión de registros. Adaptar solo patrones adecuados al ministerio y conservar la privacidad por roles.
+2. Revisar la captura de referencia del CRM de Impulso Plus Iglesias; pedir que se vuelva a adjuntar si no está disponible en la sesión.
+3. Usar la web pública de Workers como referencia para revisar rutas y comportamiento desplegado: https://ministerio-gloria-y-fuego.angel-xp-pb.workers.dev/
+4. Verificar en producción el acceso a `/admin/ingresar`, la configuración de variables, Neon/migración y carga a R2.
+5. Cargar contenido confirmado del ministerio y continuar las pruebas del sitio publicado.
