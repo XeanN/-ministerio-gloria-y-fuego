@@ -41,4 +41,4 @@ mostrando estados vacíos. Para probar el formulario sin Neon o Formspree, defin
 persona deberá confirmar el envío. En Vercel, configura ese destino con el número de Profeta Silvia.
 
 ## Propietario
-Angel Jean Pierre Ponce Bonifacio · Aliitech
+Angel Jean Pierre Ponce Bonifacio · Aliiatech
