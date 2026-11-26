@@ -23,7 +23,7 @@ Comunidad, transmisiones, enseñanzas, recursos y peticiones de oración.
 ```bash
 npm ci
 cp .env.example .env.local   # completar Neon, Better Auth y URL pública
-npm run db:migrate           # crea las tablas en Neon a partir de drizzle/migrations
+npm run db:migrate           # crea las tablas en Neon; usa DATABASE_URL_SINPOOLING si está configurada
 npm run auth:create-admin -- --email admin@tu-dominio.pe --name "Admin" --role admin
 npm run dev                  # http://localhost:3000
 ```

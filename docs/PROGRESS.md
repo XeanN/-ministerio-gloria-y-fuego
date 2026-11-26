@@ -46,6 +46,8 @@
 - [x] WhatsApp público de contacto visible en la página Contacto
 - [x] Fotos y video local integrados en la portada; video con controles y sin autoplay
 - [x] Icono de pestaña reemplazado por el emblema de Gloria y Fuego
+- [x] Catálogo de recursos rediseñado con accesos diferenciados a Biblia, familias, enseñanzas y prédicas
+- [x] Interfaz de lector bíblico preparada: navegación por libro/capítulo, búsqueda y estado de conexión
 
 ### Fase 2 — Backend y CMS
 - [x] Esquema Drizzle para autenticación y módulos (20 tablas) + migración inicial generada
@@ -62,6 +64,7 @@
 - [x] Handoff del formulario a WhatsApp con mensaje prellenado y confirmación manual del usuario
 - [ ] Aplicar la migración a Neon y crear la primera cuenta administradora
 - [ ] Configurar credenciales de Better Auth, Neon y R2
+- [ ] Configurar `API_BIBLE_API_KEY` y `API_BIBLE_BIBLE_ID`; verificar permisos y atribución de RVR1960 antes de publicar el texto
 - [ ] Completar contenido e información real del ministerio
 - [ ] Validar build y flujo en un entorno con credenciales
 
@@ -98,6 +101,10 @@ Ninguno aún.
 ---
 
 ## 📝 Decisiones tomadas esta sesión
+- La nueva portada de Recursos prioriza accesos claros por propósito y audiencia; los recursos externos se toman como patrones, no se copian textos, diseños ni datos de terceros
+- El lector `/recursos/biblia` consume API.Bible desde el servidor, nunca expone la API key al navegador; RVR1960 solo se activa con licencia/ID del proveedor y el aviso de copyright
+- Benchmark: Más Impulso Play presenta juegos breves y personalizables; e625 organiza materiales por etapas; Casa de Dios separa maneras de colaborar por ubicación y muestra tutoriales; Enlace destaca video y archivo de mensajes
+- Impulso Plus Iglesias no fue accesible durante la revisión automática, así que no se confirma compatibilidad, coste ni ventajas de integrarlo en el panel existente
 - Neon es la fuente de datos cuando `DATABASE_URL` está configurada; Formspree queda como alternativa
 - Los permisos se verifican en servidor por rol, además de proteger las páginas del panel
 - Peticiones de oración y finanzas quedan en módulos con permisos separados

@@ -56,6 +56,7 @@ export const mainNav = [
   { href: "/ensenanzas", label: "Enseñanzas" },
   { href: "/predicas", label: "Prédicas" },
   { href: "/recursos", label: "Recursos" },
+  { href: "/recursos/biblia", label: "Biblia" },
   { href: "/actividades", label: "Actividades" },
   { href: "/juegos", label: "Juegos" },
   { href: "/comunidad", label: "Comunidad" },

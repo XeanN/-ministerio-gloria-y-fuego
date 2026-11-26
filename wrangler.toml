@@ -1,0 +1,13 @@
+name = "ministerio-gloria-y-fuego"
+main = ".open-next/worker.js"
+compatibility_date = "2026-11-26"
+compatibility_flags = ["nodejs_compat"]
+upload_source_maps = true
+workers_dev = true
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+[observability]
+enabled = true

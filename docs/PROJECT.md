@@ -141,6 +141,7 @@ Inicio | En Vivo | Enseñanzas | Recursos | Juegos | Comunidad | Colabora
 | `/predicas/[slug]` | Ficha individual por prédica |
 | `/recursos` | Biblioteca: PDF, guías, estudios, materiales |
 | `/recursos/[slug]` | Ficha individual por recurso |
+| `/recursos/biblia` | Lector y buscador bíblico (API.Bible, RVR1960 sujeto a licencia) |
 | `/juegos` | Juegos bíblicos interactivos |
 | `/juegos/trivia` | Trivia bíblica |
 | `/juegos/memoria` | Memoria bíblica |
@@ -234,6 +235,7 @@ audit_logs          — Auditoría de cambios importantes
 ### Fase 3 — Recursos y Comunidad
 - [ ] Cloudflare R2 configurado
 - [ ] Biblioteca de recursos (PDF descargables)
+- [ ] Conectar API.Bible y habilitar legalmente RVR1960 para el lector de `/recursos/biblia`
 - [ ] Módulo de testimonios
 - [ ] Calendario de actividades
 - [ ] Módulo de colaboraciones en el admin

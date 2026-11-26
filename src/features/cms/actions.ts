@@ -106,7 +106,6 @@ export async function savePublicSettings(formData: FormData) {
   const parsed = publicSettingSchema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) throw new Error("El enlace debe ser una URL de Facebook válida.");
   const { siteSettings, auditLogs } = await import("@/lib/db/schema");
-  const { eq } = await import("drizzle-orm");
   const value = parsed.data.facebookUrl;
   await getDb().insert(siteSettings).values({ key: "facebookUrl", value, updatedBy: actor.user.id }).onConflictDoUpdate({ target: siteSettings.key, set: { value, updatedBy: actor.user.id, updatedAt: new Date() } });
   await getDb().insert(auditLogs).values({ id: crypto.randomUUID(), actorId: actor.user.id, action: "update", entity: "site_settings", entityId: "facebookUrl" });
@@ -134,8 +133,7 @@ export async function updateGameStatus(formData: FormData) {
   revalidatePath("/juegos"); revalidatePath("/admin/juegos");
 }
 
-const managedContent = ["content", "sermons", "resources", "events", "streams"] as const;
-type ManagedContent = (typeof managedContent)[number];
+type ManagedContent = "content" | "sermons" | "resources" | "events" | "streams";
 export async function updateContentStatus(module: ManagedContent, formData: FormData) {
   const definition = definitions[module];
   const actor = await requirePermission(definition.permission);
