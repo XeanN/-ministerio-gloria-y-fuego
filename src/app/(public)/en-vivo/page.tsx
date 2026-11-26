@@ -3,14 +3,21 @@ import { FacebookLiveEmbed } from "@/components/media/FacebookLiveEmbed";
 import { PendingNote } from "@/components/ui/pending-note";
 import { pageMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/site";
+import { getPublicSettings } from "@/lib/content/settings";
+import { getLiveStream } from "@/lib/content/public-data";
+import { normalizeVideoEmbedUrl } from "@/lib/content/video";
 
 export const metadata = pageMetadata({
   title: "En vivo",
-  description: "Transmisiones en vivo de oración y enseñanza del Ministerio Gloria y Fuego por Facebook Live.",
+  description: "Acompáñanos en vivo cada domingo, de 9 a. m. a 1 p. m., desde el Facebook del Ministerio Gloria y Fuego.",
   path: "/en-vivo",
 });
+export const dynamic = "force-dynamic";
 
-export default function EnVivoPage() {
+export default async function EnVivoPage() {
+  const settings = await getPublicSettings();
+  const facebookUrl = settings.facebookUrl;
+  const liveStream = await getLiveStream();
   return (
     <>
       <PageHeader
@@ -20,7 +27,7 @@ export default function EnVivoPage() {
       />
       <section className="bg-ivory">
         <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 lg:grid-cols-[1fr_320px]">
-          <FacebookLiveEmbed pageUrl={siteConfig.facebookUrl} />
+          {liveStream ? (liveStream.platform.toLowerCase().includes("facebook") ? <FacebookLiveEmbed pageUrl={liveStream.url} /> : <div className="overflow-hidden rounded-3xl bg-night"><div className="aspect-video"><iframe src={normalizeVideoEmbedUrl(liveStream.url) ?? undefined} title={liveStream.title} className="h-full w-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen loading="lazy" /></div></div>) : <FacebookLiveEmbed pageUrl={facebookUrl} />}
 
           <aside className="space-y-6">
             <div>
@@ -40,14 +47,14 @@ export default function EnVivoPage() {
                 <PendingNote className="mt-4">Horarios de transmisión pendientes.</PendingNote>
               )}
             </div>
-            {siteConfig.facebookUrl && (
+            {(liveStream?.url || facebookUrl) && (
               <a
-                href={siteConfig.facebookUrl}
+                href={liveStream?.url || facebookUrl || undefined}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-sm font-medium text-fire hover:underline"
+                className="inline-block text-sm font-semibold text-calm-dark hover:underline"
               >
-                Abrir en Facebook →
+                Abrir transmisión →
               </a>
             )}
           </aside>

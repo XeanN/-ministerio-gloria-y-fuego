@@ -1,4 +1,4 @@
-import { MapPin, MessageCircle } from "lucide-react";
+import { ArrowUpRight, MapPin, MessageCircle } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Button } from "@/components/ui/button";
 import { PendingNote } from "@/components/ui/pending-note";
@@ -24,25 +24,27 @@ export default function ContactoPage() {
           <div className="space-y-8">
             <div>
               <h2 className="flex items-center gap-2 text-2xl font-semibold">
-                <MapPin className="size-6 text-fire" aria-hidden /> Dirección
+                <MapPin className="size-6 text-calm-dark" aria-hidden /> Dirección
               </h2>
               {siteConfig.address ? (
                 <p className="mt-3">{siteConfig.address}</p>
               ) : (
                 <PendingNote className="mt-3">Dirección exacta pendiente ({siteConfig.city}).</PendingNote>
               )}
+              {siteConfig.mapsUrl && <a href={siteConfig.mapsUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-calm-dark hover:underline">Cómo llegar <ArrowUpRight className="size-4" aria-hidden /></a>}
             </div>
 
             <div>
               <h2 className="flex items-center gap-2 text-2xl font-semibold">
-                <MessageCircle className="size-6 text-fire" aria-hidden /> WhatsApp
+                <MessageCircle className="size-6 text-calm-dark" aria-hidden /> WhatsApp
               </h2>
               {whatsapp ? (
-                <Button asChild size="lg" className="mt-3 bg-fire hover:bg-fire-dark">
-                  <a href={whatsapp} target="_blank" rel="noopener noreferrer">
-                    Escríbenos por WhatsApp
-                  </a>
-                </Button>
+                <div className="mt-3 space-y-3">
+                  <p className="font-medium">{siteConfig.whatsappNumber === "51946131892" ? "+51 946 131 892" : `+${siteConfig.whatsappNumber}`}</p>
+                  <Button asChild size="lg" className="bg-calm text-white hover:bg-calm-dark">
+                    <a href={whatsapp} target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>
+                  </Button>
+                </div>
               ) : (
                 <PendingNote className="mt-3">Número de WhatsApp pendiente.</PendingNote>
               )}
@@ -52,8 +54,8 @@ export default function ContactoPage() {
           <div className="overflow-hidden rounded-xl bg-white shadow-sm">
             <iframe
               title={`Mapa: ${mapQuery}`}
-              src={`https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`}
-              className="aspect-[4/3] w-full border-0"
+              src={siteConfig.mapsEmbedUrl ?? `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`}
+              className="aspect-[4/3] w-full border-0 md:aspect-[5/3]"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />

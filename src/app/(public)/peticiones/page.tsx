@@ -22,8 +22,7 @@ export default function PeticionesPage() {
           <div className="space-y-4">
             <h2 className="text-2xl font-semibold">Tu petición es privada</h2>
             <p className="text-muted-foreground">
-              Solo el equipo responsable de oración leerá lo que escribas. No publicamos peticiones ni compartimos tus
-              datos.
+              Después de enviar el formulario, te indicaremos cómo compartir la petición con el equipo. Si eliges abrir WhatsApp, podrás revisar y confirmar el envío de una copia por esa aplicación. Evita incluir información que no quieras compartir.
             </p>
             <p className="flex items-center gap-2 text-sm text-muted-foreground">
               <Lock className="size-4 text-gold" aria-hidden /> Nombre y contacto son opcionales.

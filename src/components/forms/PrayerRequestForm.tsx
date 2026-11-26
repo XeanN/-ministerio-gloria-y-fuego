@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { CheckCircle2, ExternalLink, Loader2 } from "lucide-react";
 import { submitPrayerRequest, type PrayerFormState } from "@/features/prayer/actions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,14 +13,16 @@ const initialState: PrayerFormState = { status: "idle" };
 export function PrayerRequestForm() {
   const [state, formAction, pending] = useActionState(submitPrayerRequest, initialState);
 
-  if (state.status === "success") {
+  if (state.status === "success" || state.status === "whatsapp-ready") {
+    const stored = state.status === "success";
     return (
       <div role="status" className="flex flex-col items-center gap-4 rounded-xl bg-ivory p-8 text-center">
-        <CheckCircle2 className="size-12 text-fire" aria-hidden />
-        <h2 className="text-2xl font-semibold">Recibimos tu petición</h2>
+        <CheckCircle2 className="size-12 text-calm-dark" aria-hidden />
+        <h2 className="text-2xl font-semibold">{stored ? "Recibimos tu petición" : "Tu petición está lista"}</h2>
         <p className="max-w-md text-muted-foreground">
-          Nuestro equipo de intercesión estará orando por ti. Tu petición es confidencial.
+          {stored ? "El equipo del ministerio podrá verla para orar contigo." : "Ábrela en WhatsApp para compartirla con el equipo del ministerio."}
         </p>
+        {state.whatsappUrl && <div className="max-w-md space-y-3"><a href={state.whatsappUrl} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-calm px-5 py-3 text-sm font-semibold text-white hover:bg-calm-dark">Revisar y enviar por WhatsApp <ExternalLink className="size-4" aria-hidden /></a><p className="text-xs leading-5 text-muted-foreground">WhatsApp abrirá con el mensaje preparado. Léelo y pulsa Enviar allí si deseas compartirlo.</p></div>}
       </div>
     );
   }
@@ -67,9 +69,13 @@ export function PrayerRequestForm() {
           rows={6}
           placeholder="Escribe aquí por qué quieres que oremos"
           aria-invalid={Boolean(fieldErrors?.request)}
+          aria-describedby={fieldErrors?.request ? "request-error" : "request-help"}
         />
-        {fieldErrors?.request && <p className="text-sm text-destructive">{fieldErrors.request[0]}</p>}
+        {!fieldErrors?.request && <p id="request-help" className="text-xs text-muted-foreground">Comparte solo lo que te sientas cómodo/a contando.</p>}
+        {fieldErrors?.request && <p id="request-error" className="text-sm text-destructive">{fieldErrors.request[0]}</p>}
       </div>
+
+      <p className="text-xs leading-5 text-muted-foreground">Después de enviar, puedes abrir WhatsApp con tu petición ya escrita. No se compartirá por WhatsApp hasta que confirmes el envío en esa aplicación.</p>
 
       {state.status === "error" && (
         <p role="alert" className="rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
@@ -77,7 +83,7 @@ export function PrayerRequestForm() {
         </p>
       )}
 
-      <Button type="submit" size="lg" disabled={pending} className="w-full bg-fire hover:bg-fire-dark sm:w-auto">
+      <Button type="submit" size="lg" disabled={pending} className="w-full bg-calm text-white hover:bg-calm-dark sm:w-auto">
         {pending && <Loader2 className="animate-spin" aria-hidden />}
         {pending ? "Enviando…" : "Enviar petición"}
       </Button>

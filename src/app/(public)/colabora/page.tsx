@@ -30,11 +30,11 @@ export default function ColaboraPage() {
             </p>
             <ul className="space-y-4">
               <li className="flex gap-3">
-                <HeartHandshake className="mt-0.5 size-5 shrink-0 text-fire" aria-hidden />
-                <span>Los aportes sostienen las transmisiones, materiales y actividades del ministerio.</span>
+                <HeartHandshake className="mt-0.5 size-5 shrink-0 text-calm-dark" aria-hidden />
+                <span>Los aportes ayudan al mantenimiento de la casa de oración, al alquiler del local y al equipo.</span>
               </li>
               <li className="flex gap-3">
-                <ScrollText className="mt-0.5 size-5 shrink-0 text-fire" aria-hidden />
+                <ScrollText className="mt-0.5 size-5 shrink-0 text-calm-dark" aria-hidden />
                 <span>Rendimos cuentas con transparencia sobre el uso de cada colaboración.</span>
               </li>
             </ul>
@@ -53,9 +53,9 @@ export default function ColaboraPage() {
             ) : (
               <>
                 <div className="flex size-56 items-center justify-center rounded-lg border-2 border-dashed border-gold/60 bg-ivory">
-                  <QrCode className="size-20 text-gold/70" aria-hidden />
+                  <QrCode className="size-20 text-calm/60" aria-hidden />
                 </div>
-                <PendingNote>El código QR se publicará cuando el ministerio lo proporcione.</PendingNote>
+                <PendingNote>El código QR se añadirá cuando nos compartas la imagen oficial.</PendingNote>
               </>
             )}
           </div>

@@ -5,8 +5,8 @@
 ---
 
 ## Estado actual
-**Fase:** 1 — MVP en curso (páginas listas, falta deploy)
-**Fecha:** 2026-11-02
+**Fase:** 2 — Backend y módulos implementados; falta conectar servicios y desplegar
+**Fecha:** 2026-11-25
 
 ---
 
@@ -18,7 +18,7 @@
 - [x] Stack tecnológico definido y justificado
 - [x] Identidad visual definida (paleta, tipografía, estilo)
 - [x] Arquitectura de información completa (18 páginas públicas + admin)
-- [x] Modelo de datos definido (21 entidades)
+- [x] Modelo de datos definido (20 tablas en el esquema inicial)
 - [x] Roadmap por fases según crecimiento
 - [x] Estructura de carpetas creada
 - [x] Documento maestro PROJECT.md creado
@@ -29,38 +29,66 @@
 - [x] Design system: paleta en `src/app/globals.css` (`@theme`), Lora + Inter, tokens shadcn
 - [x] Componentes base: Header (menú móvil), Footer, Hero, PageHeader, PendingNote
 - [x] Homepage responsive (`src/app/(public)/page.tsx`)
-- [x] Página /en-vivo (plugin de página de Facebook; aviso si falta el enlace)
+- [x] Página /en-vivo (plugin de Facebook y horario confirmado)
 - [x] Página /nosotros (con placeholders)
-- [x] Formulario /peticiones (server action + Zod → Formspree, campo anti-spam)
+- [x] Formulario /peticiones (server action + Zod, Neon/Formspree y alternativa a WhatsApp)
 - [x] Página /colabora (QR Yape/Plin pendiente)
 - [x] Página /contacto (WhatsApp + mapa de Google sin API key)
 - [x] SEO básico: metadata por página, Open Graph, Twitter, imagen OG, sitemap.xml, robots.txt
+- [x] Pulido de UX/UI para páginas públicas: jerarquía visual, navegación responsive, estados y llamados a la acción
+- [x] Logo oficial integrado en navegación, pie de página e inicio
+- [x] Dirección y mapa de Google Maps integrados en Contacto y Nosotros
+- [x] Texto de privacidad del formulario alineado con el envío mediante Formspree
+- [x] Benchmark UX de iglesias de Lima y dirección visual tranquila para distintas edades
+- [x] Ruta de bienvenida para familias, sin prometer servicios infantiles aún no confirmados
+- [x] Enlaces oficiales a Facebook, Instagram y TikTok en la configuración y el pie de página
+- [x] Horario de Facebook Live confirmado: domingos, 9:00 a. m. a 1:00 p. m.
+- [x] WhatsApp público de contacto visible en la página Contacto
+- [x] Fotos y video local integrados en la portada; video con controles y sin autoplay
+- [x] Icono de pestaña reemplazado por el emblema de Gloria y Fuego
+
+### Fase 2 — Backend y CMS
+- [x] Esquema Drizzle para autenticación y módulos (20 tablas) + migración inicial generada
+- [x] Adaptador Neon y comandos de migración/Drizzle Studio
+- [x] Better Auth con registro público apagado y roles admin/editor/intercessor/treasurer
+- [x] Verificación de rol en páginas, acciones del servidor y rutas de API
+- [x] Panel privado, inicio/cierre de sesión, dashboard y gestión de cuentas del equipo
+- [x] Alta, lectura y publicación de enseñanzas, prédicas, recursos, transmisiones, actividades y juegos/trivia
+- [x] Bandeja privada de peticiones con asignación y estado
+- [x] Registro de colaboraciones voluntarias y gastos, con permisos separados
+- [x] Ajustes para el enlace público de Facebook y páginas públicas conectadas a contenido publicado
+- [x] Carga de PDF/imágenes a R2 mediante URL firmada, validación y registro en biblioteca
+- [x] TypeScript estricto sin errores (`tsc --noEmit`)
+- [x] Handoff del formulario a WhatsApp con mensaje prellenado y confirmación manual del usuario
+- [ ] Aplicar la migración a Neon y crear la primera cuenta administradora
+- [ ] Configurar credenciales de Better Auth, Neon y R2
+- [ ] Completar contenido e información real del ministerio
+- [ ] Validar build y flujo en un entorno con credenciales
 
 ---
 
 ## 🔄 En curso
-- Deploy en Vercel
+- Conexión de Neon, Better Auth y R2 (requiere credenciales del proyecto)
 
 ---
 
 ## ⏳ Pendiente
 
 ### Fase 1 — MVP Rápido
-- [ ] Deploy en Vercel (variables: `FORMSPREE_ENDPOINT`, `NEXT_PUBLIC_SITE_URL`)
+- [ ] Deploy en Vercel (variables: `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`, `NEXT_PUBLIC_SITE_URL`; `FORMSPREE_ENDPOINT` solo como alternativa)
 - [ ] Dominio propio conectado
 
 ### Cómo cargar los datos del ministerio
-Todos los datos pendientes viven en `src/lib/site.ts` (`facebookUrl`, `whatsappNumber`,
-`address`, `schedule`, `donationQrImage`). Al completarlos, los avisos "pendiente" desaparecen solos.
+Los datos de redes, WhatsApp público y horario viven en `src/lib/site.ts`. Queda pendiente agregar el QR oficial de Yape/Plin.
 
 ### Información pendiente del ministerio
-- [ ] Logo oficial (PNG/SVG)
-- [ ] Enlace Facebook del ministerio
-- [ ] Dirección del local
-- [ ] WhatsApp del ministerio
-- [ ] Horarios de reuniones
-- [ ] QR de Yape/Plin
-- [ ] Fotos reales del ministerio
+- [x] Logo oficial (JPG integrado; una versión transparente sería opcional)
+- [x] Redes sociales oficiales
+- [x] Dirección del local: Av. Samuel Alcázar 348, Rímac 15093, Lima, Perú
+- [x] WhatsApp público: +51 946 131 892
+- [x] Horario de transmisión: domingos, 9:00 a. m. a 1:00 p. m.
+- [x] Primeras fotos reales del ministerio
+- [ ] QR de Yape/Plin y materiales adicionales
 
 ---
 
@@ -70,14 +98,18 @@ Ninguno aún.
 ---
 
 ## 📝 Decisiones tomadas esta sesión
-- Vercel elegido sobre Cloudflare Workers (límite 10ms CPU en CF)
-- Formspree para formularios en MVP (sin backend propio)
-- Recursos y juegos aplazados a Fase 3-4 (desarrollo gradual)
-- Se descartó WordPress, n8n, Make, VPS
+- Neon es la fuente de datos cuando `DATABASE_URL` está configurada; Formspree queda como alternativa
+- Los permisos se verifican en servidor por rol, además de proteger las páginas del panel
+- Peticiones de oración y finanzas quedan en módulos con permisos separados
+- Los juegos no llevan preguntas inventadas: el equipo debe revisarlas antes de publicarlas
+- R2 se reserva para imágenes y PDF; videos usan embeds de YouTube/Facebook
+- Falta conectar credenciales y desplegar; no se ejecutaron migraciones contra Neon
 
 ---
 
 ## 🔜 Próxima sesión
-1. Crear el formulario en Formspree y poner su URL en `FORMSPREE_ENDPOINT` (`.env.local` y Vercel)
-2. Importar el repo en Vercel y desplegar
-3. Cargar en `src/lib/site.ts` los datos reales que entregue el ministerio
+1. Agregar credenciales de Neon y Better Auth en `.env.local`
+2. Ejecutar `npm run db:migrate` y crear el primer usuario con `npm run auth:create-admin -- --email ... --name ... --role admin`
+3. Agregar credenciales/CORS de Cloudflare R2 y probar la carga de PDF e imágenes
+4. Ingresar contenido confirmado y cargar datos reales del ministerio
+5. Desplegar en Vercel con las variables correspondientes

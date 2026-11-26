@@ -5,7 +5,7 @@ export const alt = siteConfig.name;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/** Imagen para compartir en Facebook/WhatsApp. Reemplazar cuando exista el logo oficial. */
+/** Imagen de marca para compartir en Facebook y WhatsApp. */
 export default function OpengraphImage() {
   return new ImageResponse(
     (
@@ -17,11 +17,11 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "center",
           padding: 80,
-          background: "radial-gradient(ellipse at 50% 120%, #E87532 0%, #101827 60%)",
-          color: "#F7F3EA",
+          background: "radial-gradient(ellipse at 50% 120%, #456F64 0%, #18343B 68%)",
+          color: "#F7F5EF",
         }}
       >
-        <div style={{ fontSize: 28, letterSpacing: 8, color: "#D5A64A", textTransform: "uppercase" }}>
+        <div style={{ fontSize: 28, letterSpacing: 8, color: "#C6A66B", textTransform: "uppercase" }}>
           Casa de oración · Lima, Perú
         </div>
         <div style={{ fontSize: 88, fontWeight: 700, marginTop: 24 }}>Ministerio Gloria y Fuego</div>

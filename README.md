@@ -13,7 +13,7 @@ Comunidad, transmisiones, enseñanzas, recursos y peticiones de oración.
 - YouTube / Facebook Live (videos)
 
 ## Fase actual
-🟡 Fase 1 — MVP (páginas públicas listas, deploy pendiente)
+🟡 Frontend y módulos del backend implementados. Falta conectar servicios, crear el primer usuario admin y desplegar.
 
 ## Documentación
 - [PROJECT.md](./docs/PROJECT.md) — Documento maestro completo
@@ -21,10 +21,24 @@ Comunidad, transmisiones, enseñanzas, recursos y peticiones de oración.
 
 ## Desarrollo local
 ```bash
-npm install
-cp .env.example .env.local   # completar FORMSPREE_ENDPOINT
+npm ci
+cp .env.example .env.local   # completar Neon, Better Auth y URL pública
+npm run db:migrate           # crea las tablas en Neon a partir de drizzle/migrations
+npm run auth:create-admin -- --email admin@tu-dominio.pe --name "Admin" --role admin
 npm run dev                  # http://localhost:3000
 ```
+
+Genera `BETTER_AUTH_SECRET` localmente con:
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"
+```
+
+El alta pública está desactivada. Crea las cuentas del equipo desde `/admin/usuarios`.
+Para cargas directas a Cloudflare R2 configura también sus claves y CORS para el dominio
+del sitio (método `PUT`, encabezado `Content-Type`, tamaño máximo 10 MB). Sin Neon, las páginas públicas siguen
+mostrando estados vacíos. Para probar el formulario sin Neon o Formspree, define
+`WHATSAPP_PRAYER_RECIPIENT` en `.env.local`; se abrirá WhatsApp con el mensaje listo y la
+persona deberá confirmar el envío. En Vercel, configura ese destino con el número de Profeta Silvia.
 
 ## Propietario
 Angel Jean Pierre Ponce Bonifacio · Aliitech

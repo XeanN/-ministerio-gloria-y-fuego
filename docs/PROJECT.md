@@ -1,7 +1,7 @@
 # Ministerio Gloria y Fuego — Documento Maestro del Proyecto
 
-> Última actualización: 2026-11-02
-> Estado: Planificación / Fase 0
+> Última actualización: 2026-11-25
+> Estado: Frontend público y módulos de backend creados; conexión de servicios y despliegue pendientes
 
 ---
 
@@ -87,16 +87,19 @@ Vercel fue creado por el mismo equipo de Next.js — compatibilidad perfecta, si
 ### Paleta de colores
 | Nombre | Hex | Uso |
 |---|---|---|
-| Azul noche | `#101827` | Fondo principal, identidad |
-| Dorado | `#D5A64A` | Detalles, énfasis |
-| Naranja fuego | `#E87532` | CTAs, botones principales |
-| Marfil | `#F7F3EA` | Fondo de secciones de lectura |
+| Azul verdoso profundo | `#18343B` | Identidad, fondos oscuros y texto |
+| Verde salvia | `#456F64` | Acciones principales y navegación |
+| Salvia claro | `#E8EFEA` | Secciones serenas y superficies |
+| Dorado suave | `#C6A66B` | Detalles del emblema y énfasis |
+| Terracota | `#A85D43` | Acentos cálidos de uso puntual |
+| Marfil cálido | `#F7F5EF` | Fondo principal y lectura |
 | Blanco | `#FFFFFF` | Fondo de contenido editorial |
 
-> ⚠️ Paleta sujeta a ajuste cuando se integre el logo oficial del ministerio.
+> La paleta combina los colores del emblema con tonos salvia y azul verdoso para una experiencia más tranquila.
 
 ### Estilo visual híbrido
-- **Cinematográfico** — homepage, hero, transmisiones
+- **Sereno y acogedor** — inicio, peticiones, visita y experiencia familiar
+- **Cinematográfico moderado** — emblema y momentos de transmisión, con acentos cálidos puntuales
 - **Editorial** — enseñanzas, artículos, devocionales
 - **Moderno** — biblioteca de recursos, catálogo
 - **Interactivo** — juegos bíblicos
@@ -299,15 +302,14 @@ audit_logs          — Auditoría de cambios importantes
 
 Los siguientes datos se actualizarán cuando estén disponibles:
 
-- [ ] Logo oficial (PNG transparente o SVG)
-- [ ] Enlace de Facebook del ministerio
-- [ ] Dirección exacta del local
-- [ ] Número de WhatsApp del ministerio
-- [ ] Horarios de reuniones
+- [x] Logo oficial (JPG recibido e integrado; reemplazar si luego se entrega versión transparente)
+- [x] Redes oficiales: Facebook, Instagram y TikTok
+- [x] Dirección exacta del local: Av. Samuel Alcázar 348, Rímac 15093, Lima, Perú
+- [x] WhatsApp público de contacto y horario de transmisión dominical
+- [x] Fotografías y un video de reuniones compartidos para el sitio
 - [ ] QR de Yape/Plin
 - [ ] Datos bancarios para transferencias (opcional)
 - [ ] Nombres y fotos de líderes/pastores
-- [ ] Fotos reales del ministerio y reuniones
 - [ ] Historia del ministerio
 
 ---
@@ -322,7 +324,7 @@ Los siguientes datos se actualizarán cuando estén disponibles:
 | Framework | Next.js | React + Vite | SEO nativo, SSR/SSG integrado, metadata por página |
 | Automatización | Ninguna (gratuito) | n8n / Make | Costo de servidor; no necesario en MVP |
 | Videos | YouTube / FB embeds | R2 storage | R2 se agotaría rápido con video; YouTube es ilimitado |
-| Formularios MVP | Formspree | Backend propio | Cero backend en Fase 1, gratis hasta 50 envíos/mes |
+| Peticiones de oración | Neon + opción de continuar por WhatsApp; Formspree como fallback | WhatsApp Business API | Confirmación manual de envío en WhatsApp; no requiere automatización pagada |
 | Donaciones | Yape QR + Mercado Pago | Stripe / PayPal | Realidad peruana; MP tiene comisión solo si entra dinero |
 
 ---
@@ -334,6 +336,16 @@ Los siguientes datos se actualizarán cuando estén disponibles:
 - Repositorio local: `D:\Aliiatech General\Ministerio-GloriaYFuego`
 - Deploy: Vercel (conectado a GitHub)
 - Dominio: pendiente de decisión
+
+## 14. Estado de implementación del backend
+
+- Neon/Drizzle: esquema de 20 tablas y migración inicial en `drizzle/migrations/0000_cute_veda.sql`.
+- Better Auth: inicio de sesión de admins y roles `admin`, `editor`, `intercessor` y `treasurer`; no hay registro abierto.
+- Panel: dashboard, contenido, prédicas, recursos, transmisiones, eventos, juegos, peticiones privadas, colaboraciones, gastos, usuarios y configuración.
+- R2: carga firmada de PDF e imágenes, validada a 10 MB y restringida a los tipos permitidos.
+- Contenido público: lee solo registros publicados; sin base configurada muestra estados vacíos.
+- Todavía requiere `DATABASE_URL`, `BETTER_AUTH_SECRET`, URL pública, claves de R2 y CORS del bucket. La migración se generó, no se aplicó a una base real.
+- El QR de colaboración, la historia del ministerio y más información editorial siguen pendientes. El formulario usa WhatsApp como alternativa si Neon y Formspree no están configurados; el usuario debe confirmar el envío en WhatsApp.
 
 ---
 

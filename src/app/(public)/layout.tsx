@@ -10,7 +10,7 @@ export default function PublicLayout({
     <>
       <a
         href="#contenido"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-fire focus:px-4 focus:py-2 focus:text-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded-md focus:bg-calm-dark focus:px-4 focus:py-2 focus:text-white"
       >
         Saltar al contenido
       </a>

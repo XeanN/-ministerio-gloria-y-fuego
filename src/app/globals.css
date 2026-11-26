@@ -2,15 +2,20 @@
 
 /*
  * Design system — Ministerio Gloria y Fuego
- * Paleta sujeta a ajuste cuando se integre el logo oficial.
+ * Paleta visual del Ministerio Gloria y Fuego.
  */
 @theme {
-  --color-night: #101827;
-  --color-night-soft: #1b2638;
-  --color-gold: #d5a64a;
-  --color-fire: #e87532;
-  --color-fire-dark: #c95e1f;
-  --color-ivory: #f7f3ea;
+  --color-night: #18343b;
+  --color-night-soft: #27474d;
+  --color-gold: #c6a66b;
+  --color-fire: #a85d43;
+  --color-fire-dark: #854631;
+  --color-calm: #456f64;
+  --color-calm-dark: #31584f;
+  --color-sage: #e8efea;
+  --color-sky: #eaf0ef;
+  --color-peach: #f4e7df;
+  --color-ivory: #f7f5ef;
 
   --font-serif: var(--font-lora), Georgia, serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
@@ -19,24 +24,24 @@
 /* Tokens semánticos usados por shadcn/ui */
 :root {
   --radius: 0.625rem;
-  --background: #ffffff;
-  --foreground: #101827;
+  --background: #fbfaf7;
+  --foreground: #20343a;
   --card: #ffffff;
-  --card-foreground: #101827;
+  --card-foreground: #20343a;
   --popover: #ffffff;
-  --popover-foreground: #101827;
-  --primary: #e87532;
+  --popover-foreground: #20343a;
+  --primary: #456f64;
   --primary-foreground: #ffffff;
-  --secondary: #f7f3ea;
-  --secondary-foreground: #101827;
-  --muted: #f7f3ea;
-  --muted-foreground: #4b5563;
-  --accent: #f7f3ea;
-  --accent-foreground: #101827;
+  --secondary: #e8efea;
+  --secondary-foreground: #20343a;
+  --muted: #f1f3ef;
+  --muted-foreground: #526269;
+  --accent: #e8efea;
+  --accent-foreground: #20343a;
   --destructive: #b91c1c;
-  --border: #e5dfd2;
-  --input: #d9d2c3;
-  --ring: #d5a64a;
+  --border: #dce4df;
+  --input: #ccd8d2;
+  --ring: #456f64;
 }
 
 @theme inline {
@@ -70,9 +75,18 @@
   }
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
   body {
     @apply bg-background font-sans text-foreground antialiased;
+  }
+  ::selection {
+    background: #dbe9e2;
+    color: #18343b;
+  }
+  a,
+  button {
+    -webkit-tap-highlight-color: transparent;
   }
   h1,
   h2,

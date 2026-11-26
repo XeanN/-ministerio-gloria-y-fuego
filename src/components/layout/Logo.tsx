@@ -1,16 +1,23 @@
 import Link from "next/link";
-import { Flame } from "lucide-react";
+import Image from "next/image";
 import { siteConfig } from "@/lib/site";
 
-/** Logo temporal — reemplazar por el logo oficial cuando el ministerio lo entregue. */
-export function Logo() {
+type LogoProps = { tone?: "light" | "dark" };
+
+export function Logo({ tone = "light" }: LogoProps) {
+  const textTone = tone === "light" ? "text-white" : "text-night";
+  const accentTone = tone === "light" ? "text-gold" : "text-calm-dark";
+
   return (
-    <Link href="/" className="flex items-center gap-2 text-white" aria-label={`${siteConfig.name} — Inicio`}>
-      <span className="flex size-9 items-center justify-center rounded-full bg-gradient-to-br from-gold to-fire">
-        <Flame className="size-5 text-night" aria-hidden />
+    <Link href="/" className={`flex min-w-0 items-center gap-3 ${textTone}`} aria-label={`${siteConfig.name} — Inicio`}>
+      <span className="relative size-11 shrink-0 overflow-hidden rounded-full border border-gold/50 bg-night-soft shadow-sm sm:size-12">
+        <Image src="/images/logo-ministerio-gloria-y-fuego.jpg" alt="" fill sizes="48px" className="object-cover" />
       </span>
-      <span className="font-serif text-lg leading-tight font-semibold tracking-wide">
-        Gloria <span className="text-gold">y</span> Fuego
+      <span className="min-w-0 leading-tight">
+        <span className={`block font-sans text-[9px] font-semibold tracking-[0.2em] ${accentTone} uppercase`}>Ministerio</span>
+        <span className="block font-serif text-base font-semibold tracking-wide sm:text-lg">
+          Gloria <span className={accentTone}>y</span> Fuego
+        </span>
       </span>
     </Link>
   );

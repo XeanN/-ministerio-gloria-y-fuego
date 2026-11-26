@@ -1,0 +1,1 @@
+export default function AccessDeniedPage() { return <section className="mx-auto max-w-xl rounded-2xl bg-white p-8"><h1 className="text-2xl font-semibold text-night">No tienes acceso a esta sección</h1><p className="mt-3 text-muted-foreground">Solicita al administrador el rol adecuado para esta tarea.</p></section>; }
