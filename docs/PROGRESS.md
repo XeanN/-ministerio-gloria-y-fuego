@@ -100,6 +100,10 @@ Ninguno aún.
 
 ---
 
+## 👀 Observaciones pendientes
+- **Formulario de peticiones:** al guardar correctamente, la página muestra “Recibimos tu petición”; después se puede abrir WhatsApp con el texto preparado mediante “Revisar y enviar por WhatsApp”, pero el mensaje solo se envía cuando la persona lo confirma allí. Revisar el texto para que quede clara esta diferencia y no parezca que ya se envió por WhatsApp.
+- **Verificación en producción:** probar en la URL de Workers que el botón abre el chat de prueba **+51 969 980 152** y que el mensaje incluye la petición. Confirmar que `WHATSAPP_PRAYER_RECIPIENT` está configurada en Cloudflare; el `.env.local` local no configura el Worker publicado.
+
 ## 📝 Decisiones tomadas esta sesión
 - La nueva portada de Recursos prioriza accesos claros por propósito y audiencia; los recursos externos se toman como patrones, no se copian textos, diseños ni datos de terceros
 - El lector `/recursos/biblia` consume API.Bible desde el servidor, nunca expone la API key al navegador; RVR1960 solo se activa con licencia/ID del proveedor y el aviso de copyright
